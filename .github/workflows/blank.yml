@@ -19,10 +19,20 @@ jobs:
       - name: Configurar o Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 14
 
-      - name: Instalar Dependências
+      - name: Instalar Dependências do Frontend
+        working-directory: frontend
         run: npm install
 
-      - name: Executar Testes
+      - name: Executar Testes do Frontend
+        working-directory: frontend
+        run: npm test
+
+      - name: Instalar Dependências do Backend
+        working-directory: backend
+        run: npm install
+
+      - name: Executar Testes do Backend
+        working-directory: backend
         run: npm test
