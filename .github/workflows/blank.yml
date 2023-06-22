@@ -11,6 +11,9 @@ on:
 jobs:
   test:
     runs-on: self-hosted
+    environment:
+      name: VPSLAREAN
+      url: https://larean.com.br
 
     steps:
       - name: Checkout do Código
@@ -29,6 +32,10 @@ jobs:
         working-directory: frontend
         run: npm test
 
+      - name: Executar Testes do Frontend
+        working-directory: frontend
+        run: npm run build
+
       - name: Instalar Dependências do Backend
         working-directory: backend
         run: npm install
@@ -36,3 +43,8 @@ jobs:
       - name: Executar Testes do Backend
         working-directory: backend
         run: npm test
+
+      - name: Executar Testes do Backend
+        working-directory: backend
+        run: npm test
+
