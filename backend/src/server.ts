@@ -3,7 +3,7 @@ import cors from "cors";
 import router from "./routes";
 
 const app = express();
-
+// teste
 app.use(cors());
 
 app.use(express.json());
