@@ -7,7 +7,7 @@ WORKDIR /frontend
 # Copia os arquivos de configuração do package.json e package-lock.json
 COPY package*.json ./
 
-# Instala as dependênciasss
+# Instala as dependências
 RUN npm install
 
 # Copia os arquivos da aplicação
