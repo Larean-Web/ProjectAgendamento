@@ -34,7 +34,7 @@ jobs:
       
       - name: Buildando Backend
         working-directory: backend
-        run: npm run play && sleep 10s
+        run: npm run play & sleep 10s
 
 
 
