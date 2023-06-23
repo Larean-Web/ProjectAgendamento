@@ -35,10 +35,10 @@ jobs:
       - name: Instalar Dependências do Backend
         working-directory: backend
         run: npm install
-        
+
       - name: Instalar Dependências
         working-directory: backend
-        run: npm dev      
+        run: npm run dev      
 
 
 
