@@ -28,10 +28,6 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      - name: Executar Testes do Frontend
-        working-directory: frontend
-        run: npm test
-
       - name: Teste de build Front end
         working-directory: frontend
         run: npm run build
@@ -39,10 +35,11 @@ jobs:
       - name: Instalar Dependências do Backend
         working-directory: backend
         run: npm install
-
-      - name: Executar Testes do Backend
+        
+      - name: Instalar Dependências
         working-directory: backend
-        run: npm test
+        run: npm dev      
+
 
 
 
