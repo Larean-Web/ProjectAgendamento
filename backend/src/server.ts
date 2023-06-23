@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-//teste
+
 app.use(router);
 
 app.listen(3000, () => {
