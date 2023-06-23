@@ -13,7 +13,7 @@ function Home() {
         </div>
         <div className="text-blue-400 font-bold max-w-[400px]">
             <Paragraph
-                text="Estamos trabalhando e logo retornaremos com mais notícias"
+                text="Estamos trabalhando e logo retornaremos com mais notícias."
             />
         </div>
       </div>
