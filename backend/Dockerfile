@@ -9,5 +9,5 @@ RUN npm install
 COPY . .
 
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "ts-node", "src/server.ts"]
 
