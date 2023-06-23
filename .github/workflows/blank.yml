@@ -13,7 +13,7 @@ jobs:
     runs-on: self-hosted
     environment:
       name: VPSLAREAN
-      url: https://larean.com.br
+      url: https://agendamento.larean.com.br
 
     steps:
       - name: Checkout do Código
@@ -22,7 +22,7 @@ jobs:
       - name: Configurar o Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Instalar Dependências do Frontend
         working-directory: frontend
@@ -32,7 +32,7 @@ jobs:
         working-directory: frontend
         run: npm test
 
-      - name: Executar Testes do Frontend
+      - name: Teste de build Front end
         working-directory: frontend
         run: npm run build
 
