@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build do backend
-        run: cd backend && npm run build
+        run: cd backend
 
       - name: Deploy do backend para FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -22,7 +22,7 @@ jobs:
           ftp-server: ${{ secrets.BACKEND_FTP_SERVER }}
           ftp-username: ${{ secrets.BACKEND_FTP_USERNAME }}
           ftp-password: ${{ secrets.BACKEND_FTP_PASSWORD }}
-          local-dir: backend/dist
+          local-dir: backend
           remote-dir: /
 
   deploy_frontend:
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build do frontend
-        run: cd frontend && npm run build
+        run: cd frontend && npm install && npm run build
 
       - name: Deploy do frontend para FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
