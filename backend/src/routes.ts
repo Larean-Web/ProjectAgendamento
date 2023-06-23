@@ -3,10 +3,6 @@ import teste from "./function/teste";
 
 const router = express.Router();
 
-// rotas a baixo
-
-router.get("/teste", teste);
-
-// rotas acima
+router.get('/teste', teste)
 
 export default router;
