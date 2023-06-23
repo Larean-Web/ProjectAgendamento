@@ -30,7 +30,7 @@ jobs:
 
       - name: Buildando Backend
         working-directory: backend
-        run: npm run tsc     
+        run: npm run build     
       
       - name: Buildando Backend
         working-directory: backend
