@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    ports:
+      - 12000:4000
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - 12001:80
+    restart: always

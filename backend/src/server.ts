@@ -1,8 +1,6 @@
-import express, { Router } from "express";
+import express from "express";
 import cors from "cors";
-import * as dotenv from "dotenv";
-
-dotenv.config();
+import router from "./routes";
 
 const app = express();
 
@@ -10,8 +8,8 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(Router);
+app.use(router);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Servidor rodando port: ${process.env.PORT}`);
+app.listen(3000, () => {
+  console.log("listening 3000");
 });
