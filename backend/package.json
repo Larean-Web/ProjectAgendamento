@@ -6,7 +6,8 @@
   "author": "macshinaider",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "start": "node src/server.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.13",

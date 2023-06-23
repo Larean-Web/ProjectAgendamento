@@ -26,7 +26,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /frontend/dist/ /usr/share/nginx/html/
 
 # Copia o arquivo de configuração personalizado do Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expõe a porta 80 para acessar a aplicação
 EXPOSE 80
