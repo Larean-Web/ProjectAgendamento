@@ -5,7 +5,7 @@ import router from "./routes";
 const app = express();
 
 app.use(cors());
-//teste
+
 app.use(express.json());
 //teste
 app.use(router);
