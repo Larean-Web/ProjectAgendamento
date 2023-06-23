@@ -44,7 +44,5 @@ jobs:
         working-directory: backend
         run: npm test
 
-      - name: Executar Testes do Backend
-        working-directory: backend
-        run: npm test
+
 
