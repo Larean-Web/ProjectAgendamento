@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 const teste = async (req: Request, res: Response) => {
   try {
-    console.log(req.method)
+    console.log(req.method, "teste")
     return res.status(200).json({ message: "teste deu certo" });
     
   } catch (error) {
