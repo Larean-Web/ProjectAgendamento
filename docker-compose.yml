@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
 
     ports:
-      - 12000:4000
+      - 12000:3000
     restart: always
 
   frontend:
