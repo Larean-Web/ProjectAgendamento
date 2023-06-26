@@ -4,6 +4,7 @@ const RegistrarHorario = (req: Request, res: Response) => {
   try {
     const params = req.params;
     const { nome, sobrenome, datanascimento } = req.body;
+    console.log(params)
 
 
 
