@@ -10,5 +10,7 @@ COPY . .
 
 RUN yarn build
 
+RUN yarn prisma generate
+
 
 CMD [ "yarn", "play" ]
