@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Title } from "../../shared/title";
+import { Link } from "react-router-dom";
+import { GoArrowLeft } from "react-icons/go"
 
 function NewPassword() {
     const [email, setEmail] = useState("");
@@ -24,7 +26,9 @@ function NewPassword() {
 
 
 
-
+            <div className="text-white absolute left-10 top-10 font-bold ">
+                <Link to="/"><GoArrowLeft size={26}/></Link>
+            </div>
             <div className="text-white text-3xl font-bold">
                 <Title title="Larean" />
             </div>
