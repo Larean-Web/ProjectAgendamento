@@ -1,12 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/home";
-import NavBar from "../components/navbar";
+import SigIn from "../pages/signin";
+import SigUp from "../pages/signup";
+import NewPassword from "../pages/newpasswordscrenn";
+import RedefinePassword from "../pages/redefinepasswordscreen";
+
 function RouterApp() {
   return (
     <BrowserRouter>
-    <NavBar/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<SigIn />} />
+        <Route path="/register" element={<SigUp />} />
+        <Route path="/newpassword" element={<NewPassword />} />
+        <Route path="/redefinepassword" element={<RedefinePassword/>} />
       </Routes>
     </BrowserRouter>
   );
