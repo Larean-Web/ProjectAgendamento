@@ -3,13 +3,15 @@ import { Title } from "../../shared/title";
 import { Link } from "react-router-dom";
 
 function SigIn() {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
 
   async function handleSignin(event:any) {
     event.preventDefault();
 
-    alert(`ola ${user}`)
+    if(usuario == "" || senha == ""){
+      alert(`Erro, preencha os campos abaixo corretamente e tente novamente`)
+    }
   }
 
   return (
@@ -36,15 +38,15 @@ function SigIn() {
         <input
           type="text"
           placeholder="Usuário"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          value={usuario}
+          onChange={(e) => setUsuario(e.target.value)}
           className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
         />
         <input
           type="password"
           placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
           className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
         />
         <div className="flex flex-col items-center text-white gap-2">

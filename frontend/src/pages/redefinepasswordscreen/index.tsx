@@ -2,8 +2,16 @@ import { useState } from "react";
 import { Title } from "../../shared/title";
 
 function RedefinePassword(){
-    const [password, setPassword] = useState("")
-    const [isPassword, setIsPassword] = useState("")
+    const [senha, setSenha] = useState("")
+    const [confirmarSenha, setConfirmarSenha] = useState("")
+
+    async function handleRedefine(event:any) {
+        event.preventDefault();
+
+        if(senha == "" || confirmarSenha == "" || confirmarSenha !== senha){
+            alert(`Error, por favor preencha os campos abaixo corretamente e tente novamente`)
+        }
+    }
     return(
         <div className="flex flex-col justify-end items-center gap-40 bg-darkblue-base w-full h-full">
 
@@ -21,21 +29,21 @@ function RedefinePassword(){
             <div className="text-white text-3xl font-bold">
                 <Title title="Larean" />
             </div>
-            <form className="flex flex-col justify-center items-center gap-7 bg-white rounded-t-[50px] w-full h-2/5 mb-[0]">
+            <form onSubmit={handleRedefine} className="flex flex-col justify-center items-center gap-7 bg-white rounded-t-[50px] w-full h-2/5 mb-[0]">
                 <div className="text-pink-base text-3xl font-bold">
                     <Title title="Esqueceu sua senha" />
                 </div>
                 <input
                     type="email"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
                     placeholder="Nova Senha"
                     className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
                 />
                 <input
                     type="email"
-                    value={isPassword}
-                    onChange={(e) => setIsPassword(e.target.value)}
+                    value={confirmarSenha}
+                    onChange={(e) => setConfirmarSenha(e.target.value)}
                     placeholder="Confirmar nova senha"
                     className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
                 />

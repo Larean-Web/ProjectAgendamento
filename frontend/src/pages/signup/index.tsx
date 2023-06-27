@@ -4,17 +4,21 @@ import { Link } from "react-router-dom";
 import { Paragraph } from "../../shared/paragraph";
 
 function SigUp() {
-  const [name, setName] = useState("");
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [password, setPassword] = useState("");
-  const [isPassword, setIsPassword] = useState("");
+  const [contato, setContato] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
 
   async function handleSigup(event: any) {
     event.preventDefault();
 
-    if (name == "" || email == "" || contact == "" || password == "" || isPassword == "") {
-      alert("error");
+    if (nome == "" || email == "" || contato == "" || senha == "" || confirmarSenha == "") {
+      alert("Erro, preencha os campos abaixo corretamente e tente novamente");
+    }else{
+      if(confirmarSenha !== senha){
+        alert(`Erro, senhas estão diferentes, verifique-as e tente novamente`)
+      }
     }
   }
 
@@ -28,8 +32,8 @@ function SigUp() {
           <input
             type="text"
             placeholder="Nome Completo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
             className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
           />
           <input
@@ -42,22 +46,22 @@ function SigUp() {
           <input
             type="tel"
             placeholder="Celular (DDD)****"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
+            value={contato}
+            onChange={(e) => setContato(e.target.value)}
             className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
           />
           <input
             type="password"
             placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
             className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
           />
           <input
             type="password"
             placeholder="Confirmar senha"
-            value={isPassword}
-            onChange={(e) => setIsPassword(e.target.value)}
+            value={confirmarSenha}
+            onChange={(e) => setConfirmarSenha(e.target.value)}
             className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
           />
 

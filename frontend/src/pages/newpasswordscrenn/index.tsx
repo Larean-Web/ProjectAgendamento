@@ -3,6 +3,14 @@ import { Title } from "../../shared/title";
 
 function NewPassword() {
     const [email, setEmail] = useState("");
+
+    async function handleEmail(event:any) {
+        event.preventDefault();
+
+        if(email == ""){
+            alert(`Preencha os campos abaixo corretamente e tente novamente`)
+        }
+    }
     return (
         <div className="flex flex-col justify-end items-center gap-40 bg-darkblue-base w-full h-full">
 
@@ -20,7 +28,7 @@ function NewPassword() {
             <div className="text-white text-3xl font-bold">
                 <Title title="Larean" />
             </div>
-            <form className="flex flex-col justify-center items-center gap-8 bg-white rounded-t-[50px] w-full h-2/5 mb-[0]">
+            <form onSubmit={handleEmail} className="flex flex-col justify-center items-center gap-8 bg-white rounded-t-[50px] w-full h-2/5 mb-[0]">
                 <div className="text-pink-base text-3xl font-bold">
                     <Title title="Esqueceu sua senha" />
                 </div>
