@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "7a4f1543-925b-4c31-a8e4-2fdd174c432f",
+		"name": "Agendamento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22927506",
+		"_collection_link": "https://www.postman.com/crimson-shadow-930219/workspace/agendamentolarean/collection/22927506-7a4f1543-925b-4c31-a8e4-2fdd174c432f?action=share&creator=22927506&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "consultaall",
+			"item": [
+				{
+					"name": "clientes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/consulta/clientes",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consulta",
+								"clientes"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5511942042224",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "marcahorario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Lucas\",\r\n    \"sobrenome\": \"Santana\",\r\n    \"datanascimento\": \"06/07/1993\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/marcahorario/5511942042224",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"marcahorario",
+								"5511942042224"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "servicos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/consulta/servico",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consulta",
+								"servico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profissionais",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/consulta/profissionais/",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consulta",
+								"profissionais",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "compromissos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/consulta/compromissos",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consulta",
+								"compromissos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "administradores",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/consulta/administradores",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consulta",
+								"administradores"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consultaindividual",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/consulta/clientes/:id",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"consulta",
+								"clientes",
+								":id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5511972929768",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "551147990535"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teste",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}:{{port}}/teste",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"teste"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "3001",
+			"type": "string"
+		}
+	]
+}

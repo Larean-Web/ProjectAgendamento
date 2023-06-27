@@ -25,7 +25,7 @@ model Administrador {
 
 model Servico {
   id             Int           @id @default(autoincrement())
-  nome           String
+  nomeservico    String
   preco          Float
   profissionalId Int
   profissional   Profissional  @relation(fields: [profissionalId], references: [id])
