@@ -10,13 +10,16 @@ import MostrarAdmin from "./function/consultaTudo/administradores";
 import ShowCliente from "./function/consultaIndividual/cliente";
 import ShowAdministrador from "./function/consultaIndividual/administrador";
 import auth from "./function/auth/auth";
+import CreateUsersAdmin from "./function/cadastros/cadastros";
+import loginadmin from "./function/login/loginadmin";
 
 const router = express.Router();
 
 router.get("/teste", teste);
+router.post("/cadastrar/createuseradmin", CreateUsersAdmin);
+router.post("/cadastrar/loginadmin", loginadmin)
 
-
-router.use(auth)
+router.use(auth);
 // rotas privadas
 
 router.post("/marcahorario/:id", RegistrarHorarios);

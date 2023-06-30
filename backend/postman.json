@@ -8,42 +8,16 @@
 	},
 	"item": [
 		{
-			"name": "consultaall",
+			"name": "cadastrar",
 			"item": [
 				{
-					"name": "clientes",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}:{{port}}/consulta/clientes",
-							"host": [
-								"{{url}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"consulta",
-								"clientes"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "5511942042224",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "marcahorario",
+					"name": "cadastraradmin",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Lucas\",\r\n    \"sobrenome\": \"Santana\",\r\n    \"datanascimento\": \"06/07/1993\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Lucas\",\r\n    \"email\": \"lucasadd15@gmail.com\",\r\n    \"contato\": \"5511942042224\",\r\n    \"password\": \"Lucas102030@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,100 +25,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}:{{port}}/marcahorario/5511942042224",
+							"raw": "{{url}}:{{port}}/cadastrar/createuseradmin",
 							"host": [
 								"{{url}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"marcahorario",
-								"5511942042224"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "servicos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}:{{port}}/consulta/servico",
-							"host": [
-								"{{url}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"consulta",
-								"servico"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "profissionais",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}:{{port}}/consulta/profissionais/",
-							"host": [
-								"{{url}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"consulta",
-								"profissionais",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "compromissos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}:{{port}}/consulta/compromissos",
-							"host": [
-								"{{url}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"consulta",
-								"compromissos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "administradores",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}:{{port}}/consulta/administradores",
-							"host": [
-								"{{url}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"consulta",
-								"administradores"
+								"cadastrar",
+								"createuseradmin"
 							]
 						}
 					},
@@ -153,36 +41,31 @@
 			]
 		},
 		{
-			"name": "consultaindividual",
+			"name": "logins",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "loginADM",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lucasadd15@gmail.com\",\r\n    \"password\": \"Lucas102030@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}:{{port}}/consulta/clientes/:id",
+							"raw": "{{url}}:{{port}}/cadastrar/loginadmin",
 							"host": [
 								"{{url}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"consulta",
-								"clientes",
-								":id"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "5511972929768",
-									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "551147990535"
-								}
+								"cadastrar",
+								"loginadmin"
 							]
 						}
 					},
@@ -238,6 +121,11 @@
 		{
 			"key": "port",
 			"value": "3001",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "Lucas102030@",
 			"type": "string"
 		}
 	]
