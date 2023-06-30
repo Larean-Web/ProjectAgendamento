@@ -2,13 +2,6 @@ import prisma from "../../prisma";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-interface DadosRequest {
-  nome: string;
-  contato: string;
-  email: string;
-  password: string;
-}
-
 const CreateUsersAdmin = async (req: Request, res: Response) => {
   try {
     const { nome, contato, email, password } = req.body;
