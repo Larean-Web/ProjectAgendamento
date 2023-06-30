@@ -12,6 +12,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     if (token === senha) {
       return next();
     }
+    
 
     return res.status(401).json({ message: "Token inválido" });
   } catch (error) {

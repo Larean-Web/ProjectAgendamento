@@ -1,0 +1,41 @@
+name: Teste tando aplicação no Frontend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: self-hosted
+    environment:
+      name: VPSLAREAN
+      url: https://agendamento.larean.com.br
+
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v2
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+          
+      - name: Instalar Dependências do frontend
+        working-directory: frontend
+        run: npm install
+
+      - name: Buildando frontend
+        working-directory: frontend
+        run: npm run build     
+      
+      - name: iniciando aplicação para teste
+        working-directory: frontend
+        run: npm run dev & sleep 15s
+
+
+
+
