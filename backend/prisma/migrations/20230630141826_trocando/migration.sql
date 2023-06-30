@@ -1,16 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `UsuarioAdministrador` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `UsuarioCliente` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE `UsuarioAdministrador`;
-
--- DropTable
-DROP TABLE `UsuarioCliente`;
-
 -- CreateTable
 CREATE TABLE `Cliente` (
     `id` VARCHAR(13) NOT NULL,
@@ -26,7 +13,7 @@ CREATE TABLE `Cliente` (
 CREATE TABLE `Administrador` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(191) NOT NULL,
-    `sobrenome` VARCHAR(191) NOT NULL,
+    `contato` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
 
@@ -36,7 +23,7 @@ CREATE TABLE `Administrador` (
 -- CreateTable
 CREATE TABLE `Servico` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nome` VARCHAR(191) NOT NULL,
+    `nomeservico` VARCHAR(191) NOT NULL,
     `preco` DOUBLE NOT NULL,
     `profissionalId` INTEGER NOT NULL,
 

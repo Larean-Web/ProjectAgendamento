@@ -18,8 +18,8 @@ model Cliente {
 model Administrador {
   id        Int    @id @default(autoincrement())
   nome      String
-  sobrenome String
-  email     String
+  contato   String
+  email     String @unique
   password  String
 }
 
