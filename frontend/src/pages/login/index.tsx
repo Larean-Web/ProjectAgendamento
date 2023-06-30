@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
 import { Link } from "react-router-dom";
 import Alerta from "../../components/alerta";
 
+import { BsEyeSlash, BsEye } from "react-icons/bs";
+import axios from "axios";
+
 function Login() {
-    const [usuario, setUsuario] = useState<string>("");
+    const [usuario, setUsuario] = useState<string>(""); //Estados que controlam os dados
     const [senha, setSenha] = useState<string>("");
-    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
+
+    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
     const [mensagem, setMensagem] = useState<string>("");
+
+    const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
+    const esconderSenha = useRef<HTMLInputElement | null>(null);
 
     async function handleSignin(event: any) {
         event.preventDefault();
@@ -19,8 +26,32 @@ function Login() {
                 setMostrarAlerta(false);
             }, 2000);
         }
+        const data = {
+            usuario: usuario,
+            senha: senha,
+        };
+        axios
+            .post(
+                "https://apiagendamento.larean.com.br/cadastrar/loginadmin",
+                data
+            )
+            .then(() => {
+                console.log("Deu certo");
+                setUsuario("");
+                setSenha("");
+            })
+            .catch(() => {
+                console.log("Deu erro");
+                setUsuario("");
+                setSenha("");
+            });
     }
 
+    if (mostrarSenha === false) {
+        esconderSenha.current?.setAttribute("type", "password");
+    } else {
+        esconderSenha.current?.setAttribute("type", "text");
+    }
     return (
         <div className="flex flex-col justify-center items-center gap-6 bg-darkblue-base w-full h-full">
             {/* alguns detalhes e enfeites adicionados ao site */}
@@ -52,7 +83,6 @@ function Login() {
                 <div className="text-white text-3xl font-bold">
                     <Title title="Bem Vindo" />
                 </div>
-
                 <input
                     type="text"
                     placeholder="Usuário"
@@ -60,13 +90,23 @@ function Login() {
                     onChange={(e) => setUsuario(e.target.value)}
                     className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
                 />
-                <input
-                    type="password"
-                    placeholder="Senha"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                    className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
-                />
+
+                <div className="relative">
+                    <input
+                        type="password"
+                        placeholder="Senha"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                        className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
+                        ref={esconderSenha}
+                    />
+                    <div
+                        className="absolute top-2 right-5 text-gray-base hover:cursor-pointer"
+                        onClick={() => setMostrarSenha(!mostrarSenha)}
+                    >
+                        {mostrarSenha ? <BsEyeSlash /> : <BsEye />}
+                    </div>
+                </div>
 
                 <div className="flex flex-col items-center text-white gap-2">
                     <button

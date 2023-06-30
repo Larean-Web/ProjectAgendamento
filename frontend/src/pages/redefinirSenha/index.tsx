@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
 import { GoArrowLeft } from "react-icons/go";
 import { Link } from "react-router-dom";
 import Alerta from "../../components/alerta";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 function RedefinirSenha() {
     const [senha, setSenha] = useState<string>("");
@@ -10,6 +11,10 @@ function RedefinirSenha() {
 
     const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
     const [mensagem, setMensagem] = useState<string>("");
+
+    const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
+    const esconderSenha = useRef<HTMLInputElement | null>(null)
+    const esconderConfirma = useRef<HTMLInputElement | null>(null)
 
     async function handleRedefine(event: any) {
         event.preventDefault();
@@ -29,6 +34,14 @@ function RedefinirSenha() {
                 }, 2000);
             }
         }
+    }
+
+    if (mostrarSenha === false) {
+        esconderSenha.current?.setAttribute('type', 'password')
+        esconderConfirma.current?.setAttribute('type', 'password')
+    } else {
+        esconderSenha.current?.setAttribute('type', 'text')
+        esconderConfirma.current?.setAttribute('type', 'text')
     }
     return (
         <div className="flex flex-col justify-end items-center gap-40 bg-darkblue-base w-full h-full">
@@ -66,19 +79,26 @@ function RedefinirSenha() {
                 <div className="text-pink-base text-3xl font-bold">
                     <Title title="Esqueceu sua senha" />
                 </div>
-                <input
-                    type="password"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                    placeholder="Nova Senha"
-                    className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
-                />
+                <div className="relative">
+                    <input
+                        type="password"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                        placeholder="Nova Senha"
+                        className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
+                        ref={esconderSenha}
+                    />
+                    <div className="absolute top-3 right-5 text-pink-base hover:cursor-pointer" onClick={() => setMostrarSenha(!mostrarSenha)}>
+                        {mostrarSenha ? <BsEyeSlash /> : <BsEye />}
+                    </div>
+                </div>
                 <input
                     type="password"
                     value={confirmarSenha}
                     onChange={(e) => setConfirmarSenha(e.target.value)}
                     placeholder="Confirmar nova senha"
                     className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
+                    ref={esconderConfirma}
                 />
                 <button
                     type="submit"

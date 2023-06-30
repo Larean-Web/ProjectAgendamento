@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
 import { Link } from "react-router-dom";
 import { Paragraph } from "../../shared/paragraph";
 import Alerta from "../../components/alerta";
+import axios from "axios";
+
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 function Registro() {
     const [nome, setNome] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
+    const [email, setEmail] = useState<string>(""); //Estados que controlam os dados
     const [contato, setContato] = useState<string>();
     const [senha, setSenha] = useState<string>("");
     const [confirmarSenha, setConfirmarSenha] = useState<string>("");
 
-    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
-    const [mensagem, setMensagem] = useState<string>("")
+    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
+    const [mensagem, setMensagem] = useState<string>("");
 
-    async function handleSigup(event: any) {
+    const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
+    const esconderSenha = useRef<HTMLInputElement | null>(null);
+    const esconderConfirma = useRef<HTMLInputElement | null>(null);
+
+    function handleSigup(event: any) {
         event.preventDefault();
 
         if (
@@ -24,20 +31,45 @@ function Registro() {
             senha == "" ||
             confirmarSenha == ""
         ) {
-           setMostrarAlerta(true)
-           setMensagem("Preencha os campos corretamente")
-           setTimeout(() => {
-            setMostrarAlerta(false)
-           }, 2000);
+            setMostrarAlerta(true);
+            setMensagem("Preencha os campos corretamente");
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 2000);
         } else {
             if (confirmarSenha !== senha) {
-              setMostrarAlerta(true)
-              setMensagem("As senhas não correspondem")
-              setTimeout(() => {
-                setMostrarAlerta(false)
-               }, 2000);
+                setMostrarAlerta(true);
+                setMensagem("As senhas não correspondem");
+                setTimeout(() => {
+                    setMostrarAlerta(false);
+                }, 2000);
             }
         }
+        const data = {
+            nome: nome,
+            email: email,
+            contato: contato,
+            password: senha,
+        };
+        axios
+            .post(
+                "https://apiagendamento.larean.com.br/cadastrar/createuseradmin",
+                data
+            )
+            .then(() => {
+                console.log("Deu certo");
+            })
+            .catch(() => {
+                console.log("Deu errado");
+            });
+    }
+
+    if (mostrarSenha === false) {
+        esconderSenha.current?.setAttribute("type", "password");
+        esconderConfirma.current?.setAttribute("type", "password");
+    } else {
+        esconderSenha.current?.setAttribute("type", "text");
+        esconderConfirma.current?.setAttribute("type", "text");
     }
 
     return (
@@ -49,9 +81,7 @@ function Registro() {
                         : "hidden"
                 }
             >
-                <Alerta
-                    mensagem={mensagem}
-                />
+                <Alerta mensagem={mensagem} />
             </div>
             <div className="flex justify-center items-center bg-white w-[400px] h-[500px] rounded-tl-[50px] rounded-tr-[200px] rounded-br-[50px] rounded-bl-[200px] shadow-xl shadow-gray-800">
                 <form onSubmit={handleSigup} className="flex flex-col gap-2">
@@ -79,19 +109,29 @@ function Registro() {
                         onChange={(e) => setContato(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                     />
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                        className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
-                    />
+                    <div className="relative">
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
+                            className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
+                            ref={esconderSenha}
+                        />
+                        <div
+                            className="absolute top-3 right-20 text-pink-base hover:cursor-pointer"
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                        >
+                            {mostrarSenha ? <BsEyeSlash /> : <BsEye />}
+                        </div>
+                    </div>
                     <input
                         type="password"
                         placeholder="Confirmar senha"
                         value={confirmarSenha}
                         onChange={(e) => setConfirmarSenha(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
+                        ref={esconderConfirma}
                     />
 
                     <div className="flex flex-col gap-4 my-2">
