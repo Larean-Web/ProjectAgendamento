@@ -1,4 +1,4 @@
-name: Teste de Aplicação React com Vite
+name: Teste tando aplicação no backend
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: self-hosted
     environment:
       name: VPSLAREAN
-      url: https://agendamento.larean.com.br
+      url: https://apiagendamento.larean.com.br
 
     steps:
       - name: Checkout do Código
@@ -32,7 +32,7 @@ jobs:
         working-directory: backend
         run: npm run build     
       
-      - name: Buildando Backend
+      - name: iniciando aplicação para teste
         working-directory: backend
         run: npm run play & sleep 10s
 
