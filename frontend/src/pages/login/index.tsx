@@ -16,6 +16,9 @@ function Login() {
     const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
     const esconderSenha = useRef<HTMLInputElement | null>(null);
 
+
+    const BASE_ROTA_LOGIN = import.meta.env.VITE_LOGIN_ROUTE
+
     async function handleSignin(event: any) {
         event.preventDefault();
 
@@ -27,12 +30,12 @@ function Login() {
             }, 2000);
         }
         const data = {
-            usuario: usuario,
-            senha: senha,
+            email: usuario,
+            password: senha,
         };
         axios
             .post(
-                "https://apiagendamento.larean.com.br/cadastrar/loginadmin",
+                BASE_ROTA_LOGIN,
                 data
             )
             .then(() => {
@@ -40,13 +43,12 @@ function Login() {
                 setUsuario("");
                 setSenha("");
             })
-            .catch(() => {
-                console.log("Deu erro");
+            .catch((err) => {
+                console.log("Deu erro" + err);
                 setUsuario("");
                 setSenha("");
             });
     }
-
     if (mostrarSenha === false) {
         esconderSenha.current?.setAttribute("type", "password");
     } else {
@@ -55,7 +57,6 @@ function Login() {
     return (
         <div className="flex flex-col justify-center items-center gap-6 bg-darkblue-base w-full h-full">
             {/* alguns detalhes e enfeites adicionados ao site */}
-
             <div className="absolute bg-blue-base/75 w-20 h-20 rounded-full left-[-20px] top-[-20px]"></div>
             <div className="fixed bg-purple-base w-5 h-5 rounded-full left-[15%] top-[7%]"></div>
             <div className="absolute bg-blue-base w-5 h-5 rounded-full left-[13%] bottom-[9%]"></div>

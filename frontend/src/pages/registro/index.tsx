@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Paragraph } from "../../shared/paragraph";
 import Alerta from "../../components/alerta";
 import axios from "axios";
@@ -20,6 +20,18 @@ function Registro() {
     const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
     const esconderSenha = useRef<HTMLInputElement | null>(null);
     const esconderConfirma = useRef<HTMLInputElement | null>(null);
+
+    const [logou, setLogou] = useState<boolean>(false)
+    
+
+    const BASE_ROTA_CADASTRO = import.meta.env.VITE_CADASTRO_ROUTE 
+
+
+    if(logou){
+        return(
+            <Navigate to="/"/>      //quando o usuario fizer o cadastro, será redirecionado a pagina de login para que ele consiga entrar na pagina de adm
+        )
+    }
 
     function handleSigup(event: any) {
         event.preventDefault();
@@ -53,15 +65,29 @@ function Registro() {
         };
         axios
             .post(
-                "https://apiagendamento.larean.com.br/cadastrar/createuseradmin",
+                BASE_ROTA_CADASTRO,
                 data
             )
             .then(() => {
-                console.log("Deu certo");
+                console.log("Usuario cadastrado com sucesso");
+                setNome("")
+                setEmail("")
+                setContato("")
+                setSenha("")
+                setConfirmarSenha("")
+                setTimeout(() => {
+                    setLogou(true)  //Esse estado vai verificar se o usuario se cadastrou corretamente e vai altorizar a mudança para a rota de login 
+                }, 2000)
             })
-            .catch(() => {
-                console.log("Deu errado");
+            .catch((err) => {
+                console.log("Algo deu errado" + err);
+                setNome("")
+                setEmail("")
+                setContato("")
+                setSenha("")
+                setConfirmarSenha("")
             });
+            localStorage.setItem("@detailUser", JSON.stringify(data))
     }
 
     if (mostrarSenha === false) {
