@@ -32,6 +32,6 @@ router.post("/consulta/compromissos", MostrarCompromissos);
 router.post("/consulta/administradores", MostrarAdmin);
 
 router.post("/consulta/clientes/:id", ShowCliente);
-router.post("/consulta/administrador/:id", ShowAdministrador);
+router.get("/consulta/administrador/:id", ShowAdministrador);
 
 export default router;
