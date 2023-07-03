@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Alerta from "../../components/alerta";
 
 import { BsEyeSlash, BsEye } from "react-icons/bs";
@@ -15,7 +15,8 @@ function Login() {
 
     const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
     const esconderSenha = useRef<HTMLInputElement | null>(null);
-
+    
+    const navegate = useNavigate()
 
     const BASE_ROTA_LOGIN = import.meta.env.VITE_LOGIN_ROUTE
 
@@ -38,8 +39,10 @@ function Login() {
                 BASE_ROTA_LOGIN,
                 data
             )
-            .then(() => {
-                console.log("Deu certo");
+            .then((response) => {
+                const userData = response.data
+                localStorage.setItem("@detailUser", JSON.stringify(userData))
+                navegate("/agenda", {replace: true})
                 setUsuario("");
                 setSenha("");
             })
@@ -48,7 +51,10 @@ function Login() {
                 setUsuario("");
                 setSenha("");
             });
+            
     }
+    
+
     if (mostrarSenha === false) {
         esconderSenha.current?.setAttribute("type", "password");
     } else {

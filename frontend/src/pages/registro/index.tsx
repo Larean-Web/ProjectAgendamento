@@ -87,7 +87,6 @@ function Registro() {
                 setSenha("")
                 setConfirmarSenha("")
             });
-            localStorage.setItem("@detailUser", JSON.stringify(data))
     }
 
     if (mostrarSenha === false) {
