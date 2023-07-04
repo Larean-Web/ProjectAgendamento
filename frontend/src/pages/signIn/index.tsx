@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
 import { Link, useNavigate } from "react-router-dom";
-import Alerta from "../../components/alerta";
+import Alerta from "../../components/alert";
 
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import axios from "axios";
 
-function Login() {
+function SigIn() {
     const [usuario, setUsuario] = useState<string>(""); //Estados que controlam os dados
     const [senha, setSenha] = useState<string>("");
 
@@ -139,4 +139,4 @@ function Login() {
         </div>
     );
 }
-export default Login;
+export default SigIn;

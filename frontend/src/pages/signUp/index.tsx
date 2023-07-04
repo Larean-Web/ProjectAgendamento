@@ -2,12 +2,12 @@ import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
 import { Link, Navigate } from "react-router-dom";
 import { Paragraph } from "../../shared/paragraph";
-import Alerta from "../../components/alerta";
+import Alerta from "../../components/alert";
 import axios from "axios";
 
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
-function Registro() {
+function SignUp() {
     const [nome, setNome] = useState<string>("");
     const [email, setEmail] = useState<string>(""); //Estados que controlam os dados
     const [contato, setContato] = useState<string>();
@@ -187,4 +187,4 @@ function Registro() {
         </div>
     );
 }
-export default Registro;
+export default SignUp;

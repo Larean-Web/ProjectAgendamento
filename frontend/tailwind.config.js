@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors:{
-        "darkblue-base":"#064A59",
+        "darkblue-base":"#123142",
         "blue-base":"#3DA5F5",
         "purple-base":"#4E4463",
         "pink-base":"#EA4674",

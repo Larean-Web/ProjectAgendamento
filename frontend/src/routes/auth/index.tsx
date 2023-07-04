@@ -1,13 +1,14 @@
-import { PropsWithChildren, ReactNode, useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { Navigate } from "react-router-dom"
 
-interface AppProps extends PropsWithChildren {
+interface AppProps {
     children: ReactNode 
 }
 
-function RotasPrivadas({children}: AppProps){
+function PrivateRoutes({children}: AppProps){
     const [loading, setLoading] = useState(true)
     const [signed, setSigned ] = useState(false) //verifica se ta logado 
+    
     const userData = localStorage.getItem("@detailUser")
     
 
@@ -43,4 +44,4 @@ function RotasPrivadas({children}: AppProps){
 
     return children
 }
-export default RotasPrivadas
+export default PrivateRoutes

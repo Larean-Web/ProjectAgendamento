@@ -1,14 +1,15 @@
 import { BrowserRouter, Route, Routes} from "react-router-dom";
-import SigIn from "../pages/login";
-import SigUp from "../pages/registro";
-import NewPassword from "../pages/novaSenha";
-import RedefinePassword from "../pages/redefinirSenha";
+import SigIn from "../pages/signIn";
+import SigUp from "../pages/signUp";
+import NewPassword from "../pages/newPassword";
+import RedefinePassword from "../pages/redefinePassword";
 
 
-import Home from "../pages/home";
-import Agenda from "../pages/agenda";
-import Agendamento from "../pages/agendamento";
-import RotasPrivadas from "./auth"
+import Schedule from "../pages/schedule";
+import Scheduling from "../pages/scheduling";
+import PrivateRoutes from "./auth"
+import Calendar from "../components/calendar"
+import Services from "../pages/services"
 
 function RouterApp() {
     return (
@@ -21,13 +22,15 @@ function RouterApp() {
                 <Route
                     path="/agenda"
                     element={
-                        <RotasPrivadas>
-                            <Agenda />
-                        </RotasPrivadas>
+                        <PrivateRoutes>
+                            <Schedule />
+                        </PrivateRoutes>
                     }
-                >
-                    <Route path="" element={<Home />} />
-                    <Route path="/agenda/agendamentos" element={<Agendamento />} />
+                >       
+                    <Route path="/agenda/agendamentos" element={<Scheduling />} >
+                        <Route path="calendar/:id" element={<Calendar/>}/>
+                    </Route>
+                    <Route path="/agenda/servicos" element={<Services/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>
