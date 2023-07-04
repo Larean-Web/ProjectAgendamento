@@ -3,7 +3,7 @@ import { Alert, Space } from "antd";
 type AppProps = {
     mensagem: string
 };
-function Alerta({mensagem}: AppProps) {
+function CAlerta({mensagem}: AppProps) {
     return (
         <div>
             <Space direction="vertical" className="text-sm">
@@ -17,4 +17,4 @@ function Alerta({mensagem}: AppProps) {
         </div>
     );
 }
-export default Alerta;
+export default CAlerta;

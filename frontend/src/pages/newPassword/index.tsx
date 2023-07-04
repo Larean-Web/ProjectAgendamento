@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Title } from "../../shared/title";
 import { Link } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go"
-import Alerta from "../../components/alerta";
+import Alerta from "../../components/alert";
 
-function NovaSenha() {
+function NewPassword() {
     const [email, setEmail] = useState("");
 
     const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
@@ -71,5 +71,5 @@ function NovaSenha() {
         </div>
     );
 }
-export default NovaSenha;
+export default NewPassword;
 

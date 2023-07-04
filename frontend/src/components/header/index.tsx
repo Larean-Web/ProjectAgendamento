@@ -1,30 +1,38 @@
-import { AiFillHome } from 'react-icons/ai'
-import { LuCalendar } from 'react-icons/lu'
-import { LiaClipboardListSolid } from 'react-icons/lia'
-import { IoPersonSharp } from 'react-icons/io5'
-import { Link } from 'react-router-dom'
+
+import { LuCalendar } from "react-icons/lu";
+import { LiaClipboardListSolid } from "react-icons/lia";
+import { IoPersonSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
+import * as Logo from "../../assets"
 
 type AppProps = {
-    rotas: string[]
-}
-function Header({rotas}: AppProps){
-    return(
-        <div className="bg-darkblue-base h-19 w-full py-5">
-            <ul className="flex justify-evenly text-white">
-                <li>
-                    <Link to={rotas[0]}><AiFillHome size={26}/></Link>
+    rotas: string[];
+};
+function Header({ rotas }: AppProps) {
+    return (
+        <div className="bg-darkblue-base h-18 w-full ">
+            <ul className="flex justify-evenly items-center text-white">
+                <li className="w-[70px]">
+                    <img src={Logo.SecundLogo}/>
                 </li>
-                <li>
-                    <Link to={rotas[1]}><LuCalendar size={26}/></Link>
+                <li className="hover:border-b-4 p-2">
+                    <Link to={rotas[1]} className="border-b-2 border-gray-base">
+                        <LuCalendar size={26} />
+                    </Link>
                 </li>
-                <li>
-                    <Link to={rotas[2]}><LiaClipboardListSolid size={26}/></Link>
+                <li className="hover:border-b-4 p-2">
+                    <Link to={rotas[2]} className="border-b-2 border-gray-base">
+                        <LiaClipboardListSolid size={26} />
+                    </Link>
                 </li>
-                <li className='border-2 rounded-full p-[2px]'>
-                    <Link to={rotas[3]}><IoPersonSharp size={20}/></Link>
+                <li className="hover:border-b-4 p-2 border-gray-base">
+                    <Link to={rotas[3]} className="flex border-[2px] rounded-full p-[1px]">
+                        <IoPersonSharp size={26} />
+                    </Link>
                 </li>
             </ul>
         </div>
-    )
+    );
 }
-export default Header
+export default Header;

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import Header from "../../components/header"
 
 
-function Agenda(){
+function Schedule(){
     const rotas: string[] = ["/agenda", "/agenda/agendamentos", "/agenda/servicos", "/agenda/cliente"]
     return(
         <div className="h-full w-full">   
@@ -11,4 +11,4 @@ function Agenda(){
         </div>
     )
 }
-export default Agenda
+export default Schedule

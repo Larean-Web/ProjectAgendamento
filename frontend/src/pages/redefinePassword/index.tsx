@@ -2,10 +2,10 @@ import { useState, useRef } from "react";
 import { Title } from "../../shared/title";
 import { GoArrowLeft } from "react-icons/go";
 import { Link } from "react-router-dom";
-import Alerta from "../../components/alerta";
+import Alerta from "../../components/alert";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
-function RedefinirSenha() {
+function RedefinePassword() {
     const [senha, setSenha] = useState<string>("");
     const [confirmarSenha, setConfirmarSenha] = useState<string>("");
 
@@ -110,5 +110,5 @@ function RedefinirSenha() {
         </div>
     );
 }
-export default RedefinirSenha;
+export default RedefinePassword;
 
