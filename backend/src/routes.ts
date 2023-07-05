@@ -10,7 +10,7 @@ import MostrarAdmin from "./function/consultaTudo/administradores";
 import ShowCliente from "./function/consultaIndividual/cliente";
 import ShowAdministrador from "./function/consultaIndividual/administrador";
 import auth from "./function/auth/auth";
-import CreateUsersAdmin from "./function/cadastros/cadastros";
+import CreateUsersAdmin from "./function/cadastros/cadastrosADM";
 import loginadmin from "./function/login/loginadmin";
 
 const router = express.Router();
@@ -32,6 +32,6 @@ router.post("/consulta/compromissos", MostrarCompromissos);
 router.post("/consulta/administradores", MostrarAdmin);
 
 router.post("/consulta/clientes/:id", ShowCliente);
-router.post("/consulta/administrador/:id", ShowAdministrador);
+router.get("/consulta/administrador/:id", ShowAdministrador);
 
 export default router;

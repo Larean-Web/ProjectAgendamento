@@ -11,10 +11,14 @@ const ShowAdministrador = async (req: Request, res: Response) => {
       },
     });
 
+    const { nome, contato, email } = dados;
+
     if (dados) {
-      return res.status(200).json(dados);
+      return res
+        .status(200)
+        .json({ nome: nome, contato: contato, email: email });
     } else {
-      return res.status(404).json({ messagem: "não existe" });
+      return res.status(404).json({ messagem: "Usuario não existe!" });
     }
   } catch (error) {
     return res.status(404).json({ error: "Está faltando o ID" });
