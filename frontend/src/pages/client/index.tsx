@@ -1,44 +1,48 @@
 import { useState } from "react";
-import { Title } from "../../shared/title";
+import BirthdayPanel from "../../components/birthdayPanel";
 import Search from "../../components/search";
+import { AddClient } from "../../components/modal";
+import { Title } from "../../shared/title";
 
-import { BsTrash, BsFillQuestionCircleFill } from "react-icons/bs";
+import { LiaBirthdayCakeSolid } from "react-icons/lia";
+import { BsFillQuestionCircleFill, BsTrash } from "react-icons/bs";
 import { RiAddFill } from "react-icons/ri";
-import { AddCategoy } from "../../components/modal";
 import { IoMdClose } from "react-icons/io"
 
-function Services() {
+
+
+
+
+
+
+
+function Client() {
     const [isAdd, setIsAdd] = useState<boolean>(false);
 
     return (
-        <div className="flex flex-col p-2 bg-white h-[92%] w-full">
-            <header className="flex justify-between items-center gap-7 w-[90%] mx-auto text-darkblue-base">
+        <div className="flex flex-col items-center p-2 bg-white h-[92%] w-full">
+            <header className="flex justify-between w-[90%] mx-auto items-center gap-7 text-darkblue-base">
                 <div className="text-darkblue-base text-3xl font-bold">
-                    <Title title="Serviços" />
+                    <Title title="Clientes" />
                 </div>
                 <div className="flex items-center gap-5">
+                    <button>
+                        <LiaBirthdayCakeSolid size={26} />
+                    </button>
                     <button>
                         <BsTrash size={26} />
                     </button>
                     <button onClick={() => setIsAdd(!isAdd)}>
-                    {isAdd ? <IoMdClose size={26}/> :<RiAddFill size={26} />}
+                        {isAdd ? <IoMdClose size={26}/> :<RiAddFill size={26} />}
                     </button>
                     <button>
-                        <BsFillQuestionCircleFill size={26} />
+                        <BsFillQuestionCircleFill size={24} />
                     </button>
                 </div>
             </header>
             <div className="mx-auto my-10">
                 <Search />
             </div>
-
-            <button
-                className="m-auto text-darkblue-base font-bold"
-                
-                onClick={() => setIsAdd(!isAdd)}
-            >
-                <RiAddFill size={40} />
-            </button>
             <div
                 className={
                     isAdd
@@ -46,10 +50,14 @@ function Services() {
                         : "hidden"
                 }
             >
-                <AddCategoy />
+                <AddClient />
+            </div>
+
+            <div className="flex justify-center w-full border-t-4 border-darkblue-base ">
+                <BirthdayPanel />
             </div>
         </div>
     );
 }
-export default Services;
+export default Client;
 

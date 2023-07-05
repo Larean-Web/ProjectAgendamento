@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import * as Logo from "../../assets"
 
 type AppProps = {
-    rotas: string[];
+    routes: string[];
 };
-function Header({ rotas }: AppProps) {
+function Header({ routes }: AppProps) {
     return (
         <div className="bg-darkblue-base h-18 w-full ">
             <ul className="flex justify-evenly items-center text-white">
@@ -17,17 +17,17 @@ function Header({ rotas }: AppProps) {
                     <img src={Logo.SecundLogo}/>
                 </li>
                 <li className="hover:border-b-4 p-2">
-                    <Link to={rotas[1]} className="border-b-2 border-gray-base">
+                    <Link to={routes[0]} className="border-b-2 border-gray-base">
                         <LuCalendar size={26} />
                     </Link>
                 </li>
                 <li className="hover:border-b-4 p-2">
-                    <Link to={rotas[2]} className="border-b-2 border-gray-base">
+                    <Link to={routes[1]} className="border-b-2 border-gray-base">
                         <LiaClipboardListSolid size={26} />
                     </Link>
                 </li>
                 <li className="hover:border-b-4 p-2 border-gray-base">
-                    <Link to={rotas[3]} className="flex border-[2px] rounded-full p-[1px]">
+                    <Link to={routes[2]} className="flex border-[2px] rounded-full p-[1px]">
                         <IoPersonSharp size={26} />
                     </Link>
                 </li>

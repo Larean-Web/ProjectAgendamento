@@ -1,20 +1,20 @@
 import { useState, useRef } from "react";
-import { Title } from "../../shared/title";
 import { Link, useNavigate } from "react-router-dom";
+import { Title } from "../../shared/title";
 import Alerta from "../../components/alert";
-
-import { BsEyeSlash, BsEye } from "react-icons/bs";
 import axios from "axios";
 
+import { BsEyeSlash, BsEye } from "react-icons/bs";
+
 function SigIn() {
-    const [usuario, setUsuario] = useState<string>(""); //Estados que controlam os dados
-    const [senha, setSenha] = useState<string>("");
+    const [user, setUser] = useState<string>(""); //Estados que controlam os dados
+    const [password, setPassword] = useState<string>("");
 
-    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
-    const [mensagem, setMensagem] = useState<string>("");
+    const [showAlert, setShowAlert] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
+    const [message, setMessage] = useState<string>("");
 
-    const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
-    const esconderSenha = useRef<HTMLInputElement | null>(null);
+    const [showPassword, setShowPassword] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
+    const hidePasswword = useRef<HTMLInputElement | null>(null);
     
     const navegate = useNavigate()
 
@@ -23,18 +23,18 @@ function SigIn() {
     async function handleSignin(event: any) {
         event.preventDefault();
 
-        if (usuario == "" || senha == "") {
-            setMostrarAlerta(true);
-            setMensagem("Preencha os campos corretamente");
+        if (user == "" || password == "") {
+            setShowAlert(true);
+            setMessage("Preencha os campos corretamente");
             setTimeout(() => {
-                setMostrarAlerta(false);
+                setShowAlert(false);
             }, 2000);
         }
         const data = {
-            email: usuario,
-            password: senha,
+            email: user,
+            password: password,
         };
-        axios
+        await axios
             .post(
                 BASE_ROTA_LOGIN,
                 data
@@ -43,22 +43,22 @@ function SigIn() {
                 const userData = response.data
                 localStorage.setItem("@detailUser", JSON.stringify(userData))
                 navegate("/agenda", {replace: true})
-                setUsuario("");
-                setSenha("");
+                setUser("");
+                setPassword("");
             })
             .catch((err) => {
                 console.log("Deu erro" + err);
-                setUsuario("");
-                setSenha("");
+                setUser("");
+                setPassword("");
             });
             
     }
     
 
-    if (mostrarSenha === false) {
-        esconderSenha.current?.setAttribute("type", "password");
+    if (showPassword === false) {
+        hidePasswword.current?.setAttribute("type", "password");
     } else {
-        esconderSenha.current?.setAttribute("type", "text");
+        hidePasswword.current?.setAttribute("type", "text");
     }
     return (
         <div className="flex flex-col justify-center items-center gap-6 bg-darkblue-base w-full h-full">
@@ -75,12 +75,12 @@ function SigIn() {
 
             <div
                 className={
-                    mostrarAlerta
+                    showAlert
                         ? "flex justify-center absolute top-5 w-5/6"
                         : "hidden"
                 }
             >
-                <Alerta mensagem={mensagem} />
+                <Alerta message={message} />
             </div>
 
             <form
@@ -93,8 +93,8 @@ function SigIn() {
                 <input
                     type="text"
                     placeholder="Usuário"
-                    value={usuario}
-                    onChange={(e) => setUsuario(e.target.value)}
+                    value={user}
+                    onChange={(e) => setUser(e.target.value)}
                     className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
                 />
 
@@ -102,16 +102,16 @@ function SigIn() {
                     <input
                         type="password"
                         placeholder="Senha"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
-                        ref={esconderSenha}
+                        ref={hidePasswword}
                     />
                     <div
                         className="absolute top-2 right-5 text-gray-base hover:cursor-pointer"
-                        onClick={() => setMostrarSenha(!mostrarSenha)}
+                        onClick={() => setShowPassword(!showPassword)}
                     >
-                        {mostrarSenha ? <BsEyeSlash /> : <BsEye />}
+                        {showPassword ? <BsEyeSlash /> : <BsEye />}
                     </div>
                 </div>
 

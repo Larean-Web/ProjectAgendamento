@@ -5,19 +5,19 @@ import { GoArrowLeft } from "react-icons/go"
 import Alerta from "../../components/alert";
 
 function NewPassword() {
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState<string>("");
 
-    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
-    const [mensagem, setMensagem] = useState<string>("");
+    const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>("");
 
     async function handleEmail(event:any) {
         event.preventDefault();
 
         if(email == ""){
-            setMostrarAlerta(true);
-            setMensagem("Preencha o campo corretamente");
+            setShowAlert(true);
+            setMessage("Preencha o campo corretamente");
             setTimeout(() => {
-                setMostrarAlerta(false);
+                setShowAlert(false);
             }, 2000);
         }
     }
@@ -35,13 +35,13 @@ function NewPassword() {
 
             <div
                 className={
-                    mostrarAlerta
+                    showAlert
                         ? "flex justify-center absolute top-5 w-5/6"
                         : "hidden"
                 }
             >
                 <Alerta
-                    mensagem={mensagem}
+                    message={message}
                 />
             </div>
 

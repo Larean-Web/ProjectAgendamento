@@ -1,15 +1,15 @@
 import { Alert, Space } from "antd";
 
 type AppProps = {
-    mensagem: string
+    message: string
 };
-function CAlerta({mensagem}: AppProps) {
+function CAlerta({message}: AppProps) {
     return (
         <div>
             <Space direction="vertical" className="text-sm">
                 <Alert
                     message="Error"
-                    description={mensagem}
+                    description={message}
                     type="error"
                     showIcon
                 />

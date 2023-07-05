@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import { Title } from "../../shared/title";
 import { Link, Navigate } from "react-router-dom";
+import { Title } from "../../shared/title";
 import { Paragraph } from "../../shared/paragraph";
 import Alerta from "../../components/alert";
 import axios from "axios";
@@ -8,105 +8,105 @@ import axios from "axios";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 function SignUp() {
-    const [nome, setNome] = useState<string>("");
+    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>(""); //Estados que controlam os dados
-    const [contato, setContato] = useState<string>();
-    const [senha, setSenha] = useState<string>("");
-    const [confirmarSenha, setConfirmarSenha] = useState<string>("");
+    const [contact, setContact] = useState<string>();
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
-    const [mensagem, setMensagem] = useState<string>("");
+    const [showAlert, setShowAlert] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
+    const [message, setMessage] = useState<string>("");
 
-    const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
-    const esconderSenha = useRef<HTMLInputElement | null>(null);
-    const esconderConfirma = useRef<HTMLInputElement | null>(null);
+    const [showPassword, setShowPassword] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
+    const hidePasswword = useRef<HTMLInputElement | null>(null);
+    const hideConfirm = useRef<HTMLInputElement | null>(null);
 
-    const [logou, setLogou] = useState<boolean>(false)
+    const [isLogged, setIsLogged] = useState<boolean>(false)
     
 
     const BASE_ROTA_CADASTRO = import.meta.env.VITE_CADASTRO_ROUTE 
 
 
-    if(logou){
+    if(isLogged){
         return(
             <Navigate to="/"/>      //quando o usuario fizer o cadastro, será redirecionado a pagina de login para que ele consiga entrar na pagina de adm
         )
     }
 
-    function handleSigup(event: any) {
+    async function handleSigup(event: any) {
         event.preventDefault();
 
         if (
-            nome == "" ||
+            name == "" ||
             email == "" ||
-            contato == "" ||
-            senha == "" ||
-            confirmarSenha == ""
+            contact == "" ||
+            password == "" ||
+            confirmPassword == ""
         ) {
-            setMostrarAlerta(true);
-            setMensagem("Preencha os campos corretamente");
+            setShowAlert(true);
+            setMessage("Preencha os campos corretamente");
             setTimeout(() => {
-                setMostrarAlerta(false);
+                setShowAlert(false);
             }, 2000);
         } else {
-            if (confirmarSenha !== senha) {
-                setMostrarAlerta(true);
-                setMensagem("As senhas não correspondem");
+            if (confirmPassword !== password) {
+                setShowAlert(true);
+                setMessage("As senhas não correspondem");
                 setTimeout(() => {
-                    setMostrarAlerta(false);
+                    setShowAlert(false);
                 }, 2000);
             }
         }
         const data = {
-            nome: nome,
+            nome: name,
             email: email,
-            contato: contato,
-            password: senha,
+            contato: contact,
+            password: password,
         };
-        axios
+        await axios
             .post(
                 BASE_ROTA_CADASTRO,
                 data
             )
             .then(() => {
                 console.log("Usuario cadastrado com sucesso");
-                setNome("")
+                setName("")
                 setEmail("")
-                setContato("")
-                setSenha("")
-                setConfirmarSenha("")
+                setContact("")
+                setPassword("")
+                setConfirmPassword("")
                 setTimeout(() => {
-                    setLogou(true)  //Esse estado vai verificar se o usuario se cadastrou corretamente e vai altorizar a mudança para a rota de login 
+                    setIsLogged(true)  //Esse estado vai verificar se o usuario se cadastrou corretamente e vai altorizar a mudança para a rota de login 
                 }, 2000)
             })
             .catch((err) => {
                 console.log("Algo deu errado" + err);
-                setNome("")
+                setName("")
                 setEmail("")
-                setContato("")
-                setSenha("")
-                setConfirmarSenha("")
+                setContact("")
+                setPassword("")
+                setConfirmPassword("")
             });
     }
 
-    if (mostrarSenha === false) {
-        esconderSenha.current?.setAttribute("type", "password");
-        esconderConfirma.current?.setAttribute("type", "password");
+    if (showPassword === false) {
+        hidePasswword.current?.setAttribute("type", "password");
+        hideConfirm.current?.setAttribute("type", "password");
     } else {
-        esconderSenha.current?.setAttribute("type", "text");
-        esconderConfirma.current?.setAttribute("type", "text");
+        hidePasswword.current?.setAttribute("type", "text");
+        hideConfirm.current?.setAttribute("type", "text");
     }
 
     return (
         <div className="flex items-center  bg-darkblue-base justify-center  h-full w-full">
             <div
                 className={
-                    mostrarAlerta
+                    showAlert
                         ? "flex justify-center absolute top-5 w-5/6"
                         : "hidden"
                 }
             >
-                <Alerta mensagem={mensagem} />
+                <Alerta message={message} />
             </div>
             <div className="flex justify-center items-center bg-white w-[400px] h-[500px] rounded-tl-[50px] rounded-tr-[200px] rounded-br-[50px] rounded-bl-[200px] shadow-xl shadow-gray-800">
                 <form onSubmit={handleSigup} className="flex flex-col gap-2">
@@ -116,8 +116,8 @@ function SignUp() {
                     <input
                         type="text"
                         placeholder="Nome Completo"
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                     />
                     <input
@@ -130,33 +130,33 @@ function SignUp() {
                     <input
                         type="tel"
                         placeholder="Celular (DDD)****"
-                        value={contato}
-                        onChange={(e) => setContato(e.target.value)}
+                        value={contact}
+                        onChange={(e) => setContact(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                     />
                     <div className="relative">
                         <input
                             type="password"
                             placeholder="Senha"
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
-                            ref={esconderSenha}
+                            ref={hidePasswword}
                         />
                         <div
                             className="absolute top-3 right-20 text-pink-base hover:cursor-pointer"
-                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            onClick={() => setShowPassword(!showPassword)}
                         >
-                            {mostrarSenha ? <BsEyeSlash /> : <BsEye />}
+                            {showPassword ? <BsEyeSlash /> : <BsEye />}
                         </div>
                     </div>
                     <input
                         type="password"
                         placeholder="Confirmar senha"
-                        value={confirmarSenha}
-                        onChange={(e) => setConfirmarSenha(e.target.value)}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
-                        ref={esconderConfirma}
+                        ref={hideConfirm}
                     />
 
                     <div className="flex flex-col gap-4 my-2">
