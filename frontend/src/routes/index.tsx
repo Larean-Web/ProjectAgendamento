@@ -10,6 +10,7 @@ import Scheduling from "../pages/scheduling";
 import PrivateRoutes from "./auth"
 import Calendar from "../components/calendar"
 import Services from "../pages/services"
+import Client from "../pages/client";
 
 function RouterApp() {
     return (
@@ -27,10 +28,11 @@ function RouterApp() {
                         </PrivateRoutes>
                     }
                 >       
-                    <Route path="/agenda/agendamentos" element={<Scheduling />} >
+                    <Route path="/agenda" element={<Scheduling />} >
                         <Route path="calendar/:id" element={<Calendar/>}/>
                     </Route>
                     <Route path="/agenda/servicos" element={<Services/>}/>
+                    <Route path="/agenda/cliente" element={<Client/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

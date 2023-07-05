@@ -6,42 +6,42 @@ import Alerta from "../../components/alert";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 function RedefinePassword() {
-    const [senha, setSenha] = useState<string>("");
-    const [confirmarSenha, setConfirmarSenha] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-    const [mostrarAlerta, setMostrarAlerta] = useState<boolean>(false);
-    const [mensagem, setMensagem] = useState<string>("");
+    const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>("");
 
-    const [mostrarSenha, setMostrarSenha] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
-    const esconderSenha = useRef<HTMLInputElement | null>(null)
-    const esconderConfirma = useRef<HTMLInputElement | null>(null)
+    const [showPassword, setShowPassword] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
+    const hidePassword = useRef<HTMLInputElement | null>(null)
+    const hideConfirm = useRef<HTMLInputElement | null>(null)
 
     async function handleRedefine(event: any) {
         event.preventDefault();
 
-        if (senha == "" || confirmarSenha == "") {
-            setMostrarAlerta(true);
-            setMensagem("Preencha os campos corretamente");
+        if (password == "" || confirmPassword == "") {
+            setShowAlert(true);
+            setMessage("Preencha os campos corretamente");
             setTimeout(() => {
-                setMostrarAlerta(false);
+                setShowAlert(false);
             }, 2000);
         } else {
-            if (confirmarSenha !== senha) {
-                setMostrarAlerta(true);
-                setMensagem("As senhas não correspondem");
+            if (confirmPassword !== password) {
+                setShowAlert(true);
+                setMessage("As senhas não correspondem");
                 setTimeout(() => {
-                    setMostrarAlerta(false);
+                    setShowAlert(false);
                 }, 2000);
             }
         }
     }
 
-    if (mostrarSenha === false) {
-        esconderSenha.current?.setAttribute('type', 'password')
-        esconderConfirma.current?.setAttribute('type', 'password')
+    if (showPassword === false) {
+        hidePassword.current?.setAttribute('type', 'password')
+        hideConfirm.current?.setAttribute('type', 'password')
     } else {
-        esconderSenha.current?.setAttribute('type', 'text')
-        esconderConfirma.current?.setAttribute('type', 'text')
+        hidePassword.current?.setAttribute('type', 'text')
+        hideConfirm.current?.setAttribute('type', 'text')
     }
     return (
         <div className="flex flex-col justify-end items-center gap-40 bg-darkblue-base w-full h-full">
@@ -54,13 +54,13 @@ function RedefinePassword() {
 
             <div
                 className={
-                    mostrarAlerta
+                    showAlert
                         ? "flex justify-center absolute top-5 w-5/6"
                         : "hidden"
                 }
             >
                 <Alerta
-                    mensagem={mensagem}
+                    message={message}
                 />
             </div>
 
@@ -82,23 +82,23 @@ function RedefinePassword() {
                 <div className="relative">
                     <input
                         type="password"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="Nova Senha"
                         className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
-                        ref={esconderSenha}
+                        ref={hidePassword}
                     />
-                    <div className="absolute top-3 right-5 text-pink-base hover:cursor-pointer" onClick={() => setMostrarSenha(!mostrarSenha)}>
-                        {mostrarSenha ? <BsEyeSlash /> : <BsEye />}
+                    <div className="absolute top-3 right-5 text-pink-base hover:cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? <BsEyeSlash /> : <BsEye />}
                     </div>
                 </div>
                 <input
                     type="password"
-                    value={confirmarSenha}
-                    onChange={(e) => setConfirmarSenha(e.target.value)}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirmar nova senha"
                     className="bg-gray-base w-[280px] h-10 rounded-[50px] pl-5 outline-none"
-                    ref={esconderConfirma}
+                    ref={hideConfirm}
                 />
                 <button
                     type="submit"

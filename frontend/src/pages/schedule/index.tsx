@@ -3,10 +3,10 @@ import Header from "../../components/header"
 
 
 function Schedule(){
-    const rotas: string[] = ["/agenda", "/agenda/agendamentos", "/agenda/servicos", "/agenda/cliente"]
+    const routes: string[] = ["/agenda", "/agenda/servicos", "/agenda/cliente"]
     return(
         <div className="h-full w-full">   
-           <Header rotas={rotas}/>
+           <Header routes={routes}/>
            <Outlet/>
         </div>
     )
