@@ -34,7 +34,7 @@ function SigIn() {
             email: user,
             password: password,
         };
-        axios
+        await axios
             .post(
                 BASE_ROTA_LOGIN,
                 data

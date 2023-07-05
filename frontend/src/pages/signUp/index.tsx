@@ -33,7 +33,7 @@ function SignUp() {
         )
     }
 
-    function handleSigup(event: any) {
+    async function handleSigup(event: any) {
         event.preventDefault();
 
         if (
@@ -63,7 +63,7 @@ function SignUp() {
             contato: contact,
             password: password,
         };
-        axios
+        await axios
             .post(
                 BASE_ROTA_CADASTRO,
                 data
