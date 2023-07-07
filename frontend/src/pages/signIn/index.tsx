@@ -20,10 +20,12 @@ function SigIn() {
 
     const BASE_ROTA_LOGIN = import.meta.env.VITE_LOGIN_ROUTE
 
+    
+
     async function handleSignin(event: any) {
         event.preventDefault();
 
-        if (user == "" || password == "") {
+        if (user == ""|| password == "") {
             setShowAlert(true);
             setMessage("Preencha os campos corretamente");
             setTimeout(() => {
@@ -94,7 +96,7 @@ function SigIn() {
                     type="text"
                     placeholder="Usuário"
                     value={user}
-                    onChange={(e) => setUser(e.target.value)}
+                    onChange={e => setUser(e.target.value)}
                     className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
                 />
 
@@ -103,7 +105,7 @@ function SigIn() {
                         type="password"
                         placeholder="Senha"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={e => setPassword(e.target.value)}
                         className="bg-gray-base/25 w-60 rounded-[50px] h-8 px-5 text-white outline-none"
                         ref={hidePasswword}
                     />

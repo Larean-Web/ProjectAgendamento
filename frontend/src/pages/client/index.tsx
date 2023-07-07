@@ -50,7 +50,7 @@ function Client() {
                         : "hidden"
                 }
             >
-                <AddClient />
+                <AddClient isAdd={isAdd} setIsAdd={setIsAdd} />
             </div>
 
             <div className="flex justify-center w-full border-t-4 border-darkblue-base ">
