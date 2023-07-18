@@ -18,3 +18,11 @@ services:
         ports:
             - 12001:80
         restart: always
+    cliente:
+        build:
+            context: ./cliente
+            dockerfile: Dockerfile
+
+        ports:
+            - 12002:80
+        restart: always

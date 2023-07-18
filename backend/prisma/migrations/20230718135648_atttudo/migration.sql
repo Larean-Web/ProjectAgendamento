@@ -1,9 +1,11 @@
 -- CreateTable
 CREATE TABLE `Cliente` (
     `id` VARCHAR(13) NOT NULL,
-    `nome` VARCHAR(191) NOT NULL,
-    `sobrenome` VARCHAR(191) NOT NULL,
+    `fotoperfil` VARCHAR(191) NULL,
+    `nome` VARCHAR(191) NULL,
+    `sobrenome` VARCHAR(191) NULL,
     `dataNascimento` DATETIME(3) NULL,
+    `updateinfo` DATETIME(3) NULL,
 
     UNIQUE INDEX `Cliente_id_key`(`id`),
     PRIMARY KEY (`id`)
@@ -17,6 +19,7 @@ CREATE TABLE `Administrador` (
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `Administrador_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -49,6 +52,18 @@ CREATE TABLE `Compromisso` (
     `profissionalId` INTEGER NOT NULL,
     `servicoId` INTEGER NOT NULL,
 
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Whatsapp` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `number` INTEGER NOT NULL,
+    `token` VARCHAR(191) NOT NULL,
+    `webhooks` VARCHAR(191) NOT NULL,
+    `state` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `Whatsapp_number_key`(`number`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

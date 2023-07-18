@@ -12,12 +12,14 @@ import ShowAdministrador from "./function/consultaIndividual/administrador";
 import auth from "./function/auth/auth";
 import CreateUsersAdmin from "./function/cadastros/cadastrosADM";
 import loginadmin from "./function/login/loginadmin";
+import NovaMsg from "./function/whatsapp/novamensagem";
 
 const router = express.Router();
 
 router.get("/teste", teste);
 router.post("/cadastrar/createuseradmin", CreateUsersAdmin);
 router.post("/cadastrar/loginadmin", loginadmin)
+router.post("/whatsapp/novamsg", NovaMsg)
 
 router.use(auth);
 // rotas privadas
