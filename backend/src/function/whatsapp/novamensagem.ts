@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const token = process.env.TOKENQUEPASAAPI;
-const clienturl = process.env.FRONTCLIENTE
+const clienturl = process.env.FRONTCLIENTE;
 
 const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
@@ -41,7 +41,9 @@ const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
 
       const sendmsg = await api.post(`/v3/bot/${token}/sendtext`, {
         chatid: body.chat.id,
-        text: `Olá Seja Bem Vindo(a), Para Fazer Um agendamento por favor acessar esse link \n ${clienturl + '/'}`,
+        text: `Olá Seja Bem Vindo(a), Para Fazer Um agendamento por favor acessar esse link \n ${
+          clienturl + "/"
+        }`,
       });
 
       return res.status(201).json({
@@ -53,7 +55,7 @@ const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
     }
   }
 
-  return res.json("deu certo");
+  return res.json("Usuario ja cadastrado");
 };
 
 export default NovaMsg;

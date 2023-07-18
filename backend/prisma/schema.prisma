@@ -15,6 +15,7 @@ model Cliente {
   dataNascimento DateTime?
   updateinfo     DateTime?
   compromissos   Compromisso[]
+  linksurl       linksurl[]
 }
 
 model Administrador {
@@ -61,4 +62,12 @@ model Whatsapp {
   token    String
   webhooks String
   state    String
+}
+
+model linksurl {
+  id           String     @id
+  urlEncurtada String @unique
+  urlOriginal  String
+  clienteId    String
+  cliente      Cliente @relation(fields: [clienteId], references: [id])
 }
