@@ -13,7 +13,7 @@ async function CapturarFoto(contato: string) {
     const foto = getFotoPerfil.data.info.url;
     return foto;
   } catch (error) {
-    console.error(error);
+    console.log('Deu um erro ao capturar a foto');
   }
 }
 

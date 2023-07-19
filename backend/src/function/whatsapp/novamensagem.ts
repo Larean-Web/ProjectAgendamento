@@ -4,11 +4,14 @@ import api from "../../services/api";
 import dotenv from "dotenv";
 import CapturarFoto from "./fuction/getfotowhatsapp";
 import { diminuirlink } from "../../Ferramentas/PersonalizarURL/diminuirlink";
+import EnviarMsg from "./fuction/EnviarMsgQuepasa";
 
 dotenv.config();
 
-const token = process.env.TOKENQUEPASAAPI;
-const redirecionar = process.env.REDIRECTAPI;
+const bemvindo =
+  "🎉 Olá! Seja muito bem-vindo(a) ao nosso grupo! Estamos felizes em tê-lo(a) conosco. Caso queira agendar algo, é só clicar no link abaixo. Aproveite sua estadia e sinta-se à vontade para interagir conosco! \n \n";
+
+const redirecionar = process.env.REDIRECTAPI || "http://localhost:3001";
 const siteCliente = process.env.FRONTCLIENTE;
 
 const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
@@ -35,31 +38,39 @@ const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
           updateinfo: horaAtual,
         },
       });
-      await new Promise(resolve => setTimeout(resolve, 3000))
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const urlcurta = await diminuirlink(urlgrande, contato);
-      await new Promise(resolve => setTimeout(resolve, 3000))
-      const retorno =  urlcurta;
-      console.log(retorno)
-
-      
-
-      const sendmsg = await api.post(`/v3/bot/${token}/sendtext`, {
-        chatid: body.chat.id,
-        text: `Olá Seja Bem Vindo(a), Para Fazer Um agendamento por favor acessar esse link \n ${
-          redirecionar + "/"
-        }`,
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const retorno = urlcurta;
+      const dadoslink = await prisma.linksurl.findUnique({
+        where: {
+          id: contato,
+        },
       });
+      console.log(dadoslink);
+      if (dadoslink) {
+        const chave1 = dadoslink.urlEncurtada;
+        const linkfinal = redirecionar + "/" + chave1;
+        const mensagemfinal = bemvindo + linkfinal;
+        const resposta = await EnviarMsg(cadastrar.id, mensagemfinal);
+      }
 
       return res.status(201).json({
         message:
           "Cadastrado usuario no banco de dados e enviado o link com parametros",
+        dados: retorno,
       });
     } catch (error) {
       return res.status(400).json(error);
     }
   }
+  const jatem = await prisma.linksurl.findUnique({
+    where: {
+      id: contato,
+    },
+  });
 
-  return res.json("Usuario ja cadastrado");
+  return res.status(200).json({ message: "Ja tem um Link", dados: jatem });
 };
 
 export default NovaMsg;
