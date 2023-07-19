@@ -21,7 +21,6 @@ const redirect = async (req: Request, res: Response) => {
     return res.redirect(301, link.urlOriginal);
   } catch (error) {
     return res.status(404).send(error);
-    
   }
 };
 

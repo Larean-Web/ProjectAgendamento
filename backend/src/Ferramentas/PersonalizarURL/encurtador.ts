@@ -14,17 +14,24 @@ const encurtarlink = async (req: Request, res: Response) => {
     const chavealeatoria = gerarChave(10);
     const urlcurta = chavealeatoria;
 
+    if (!body.idusuario) {
+      return res.status(400).json({
+        mensagem: "idusuario não informado",
+      });
+    }
+
     if (body) {
       const consulta = await prisma.linksurl.findUnique({
         where: {
           id: body.idusuario,
         },
       });
-      console.log(consulta);
+
       if (consulta) {
         return res.status(200).json({
           message: "Ja existia no Banco de dados",
-          Url: consulta.urlOriginal,
+          UrlOriginal: consulta.urlOriginal,
+          codigo: consulta.urlEncurtada,
         });
       }
 
@@ -37,22 +44,15 @@ const encurtarlink = async (req: Request, res: Response) => {
             clienteId: body.idusuario,
           },
         });
-        return res
-          .status(200)
-          .json({ message: "Link Cadastrado", codigo: cadastrar.urlEncurtada });
+        return res.status(200).json({
+          message: "Link Cadastrado",
+          codigo: cadastrar.urlEncurtada,
+          urlOriginal: cadastrar.urlOriginal,
+        });
       }
     }
-
-    if (!body) {
-      return res.status(400).json({ message: "faltando Parametros" });
-    }
-
-    console.log(body);
-    console.log(chavealeatoria);
-
-    return res.json(body);
   } catch (error) {
-    return res.status(404).send(error);
+    return res.status(404).send({message: error.message});
   }
 };
 

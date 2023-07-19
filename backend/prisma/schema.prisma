@@ -67,7 +67,7 @@ model Whatsapp {
 model linksurl {
   id           String     @id
   urlEncurtada String @unique
-  urlOriginal  String
+  urlOriginal  String @db.VarChar(500)
   clienteId    String
   cliente      Cliente @relation(fields: [clienteId], references: [id])
 }

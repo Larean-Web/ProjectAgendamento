@@ -13,9 +13,9 @@ import auth from "./function/auth/auth";
 import CreateUsersAdmin from "./function/cadastros/cadastrosADM";
 import loginadmin from "./function/login/loginadmin";
 import NovaMsg from "./function/whatsapp/novamensagem";
-import gerarChave from "./Ferramentas/PersonalizarURL/gerarchave";
 import encurtarlink from "./Ferramentas/PersonalizarURL/encurtador";
 import redirect from "./Ferramentas/PersonalizarURL/redirect";
+import teste1 from "./Test/testes";
 
 const router = express.Router();
 
@@ -23,12 +23,11 @@ router.get("/teste", teste);
 router.post("/cadastrar/createuseradmin", CreateUsersAdmin);
 router.post("/cadastrar/loginadmin", loginadmin);
 router.post("/whatsapp/novamsg", NovaMsg);
-router.get('/:redirect', redirect)
-
+router.get("/:redirect", redirect);
+router.post("/teste1", teste1);
 
 router.post("/encurtador", encurtarlink);
 router.use(auth);
-// rotas privadas
 
 router.post("/marcahorario/:id", RegistrarHorarios);
 
