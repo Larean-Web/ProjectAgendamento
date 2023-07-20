@@ -10,17 +10,25 @@ import MostrarAdmin from "./function/consultaTudo/administradores";
 import ShowCliente from "./function/consultaIndividual/cliente";
 import ShowAdministrador from "./function/consultaIndividual/administrador";
 import auth from "./function/auth/auth";
-import CreateUsersAdmin from "./function/cadastros/cadastros";
+import CreateUsersAdmin from "./function/cadastros/cadastrosADM";
 import loginadmin from "./function/login/loginadmin";
+import NovaMsg from "./function/whatsapp/novamensagem";
+import encurtarlink from "./Ferramentas/PersonalizarURL/encurtador";
+import redirect from "./Ferramentas/PersonalizarURL/redirect";
+import teste1 from "./Test/testes";
 
 const router = express.Router();
 
 router.get("/teste", teste);
 router.post("/cadastrar/createuseradmin", CreateUsersAdmin);
-router.post("/cadastrar/loginadmin", loginadmin)
+router.post("/cadastrar/loginadmin", loginadmin);
+router.post("/whatsapp/novamsg", NovaMsg);
+router.get("/:redirect", redirect);
+router.post("/teste1", teste1);
+router.post("/consulta/clientes/:id", ShowCliente);
 
+router.post("/encurtador", encurtarlink);
 router.use(auth);
-// rotas privadas
 
 router.post("/marcahorario/:id", RegistrarHorarios);
 
@@ -31,7 +39,7 @@ router.post("/consulta/clientes/show", clienteShow);
 router.post("/consulta/compromissos", MostrarCompromissos);
 router.post("/consulta/administradores", MostrarAdmin);
 
-router.post("/consulta/clientes/:id", ShowCliente);
-router.post("/consulta/administrador/:id", ShowAdministrador);
+
+router.get("/consulta/administrador/:id", ShowAdministrador);
 
 export default router;

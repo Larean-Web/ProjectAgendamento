@@ -1,19 +1,20 @@
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const tokenValido = process.env.PASSWORDTOKEN || "Lucas102030@";
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
-    const senha = "Lucas102030@";
-
     if (!token) {
-      return res.status(400).json({ message: "Token faltando" });
+      throw new Error("Token não fornecido");
     }
-
-    if (token === senha) {
-      return next();
-    }
-
-    return res.status(401).json({ message: "Token inválido" });
+    const decoded = jwt.verify(token, tokenValido);
+    console.log(decoded);
+    next();
   } catch (error) {
     // Passe o erro para o próximo middleware de tratamento de erros
     return next(error);

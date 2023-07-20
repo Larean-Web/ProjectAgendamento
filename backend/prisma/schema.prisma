@@ -9,18 +9,21 @@ datasource db {
 
 model Cliente {
   id             String        @id @unique @db.VarChar(13)
-  nome           String
-  sobrenome      String
+  fotoperfil     String?
+  nome           String?
+  sobrenome      String?
   dataNascimento DateTime?
+  updateinfo     DateTime?
   compromissos   Compromisso[]
+  linksurl       linksurl[]
 }
 
 model Administrador {
-  id        Int    @id @default(autoincrement())
-  nome      String
-  contato   String
-  email     String @unique
-  password  String
+  id       Int    @id @default(autoincrement())
+  nome     String
+  contato  String
+  email    String @unique
+  password String
 }
 
 model Servico {
@@ -43,6 +46,7 @@ model Profissional {
 
 model Compromisso {
   id             Int          @id @default(autoincrement())
+  
   data           DateTime
   hora           String
   clienteId      String
@@ -51,4 +55,20 @@ model Compromisso {
   cliente        Cliente      @relation(fields: [clienteId], references: [id])
   profissional   Profissional @relation(fields: [profissionalId], references: [id])
   servico        Servico      @relation(fields: [servicoId], references: [id])
+}
+
+model Whatsapp {
+  id       Int    @id @default(autoincrement())
+  number   Int    @unique
+  token    String
+  webhooks String
+  state    String
+}
+
+model linksurl {
+  id           String     @id
+  urlEncurtada String @unique
+  urlOriginal  String @db.VarChar(500)
+  clienteId    String
+  cliente      Cliente @relation(fields: [clienteId], references: [id])
 }
