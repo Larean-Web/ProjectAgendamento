@@ -3,6 +3,8 @@ import cors from "cors";
 import router from "./routes";
 import fs from 'fs';
 import dotenv from "dotenv";
+import bodyParser from 'body-parser';
+import { enviarParaFila, receberDaFila } from './rabbitmq/rabbitmq';
 
 
 dotenv.config();
@@ -13,6 +15,8 @@ const app = express();
 
 app.use(cors());
 app.set("trust proxy", true);
+
+app.use(bodyParser.json());
 
 app.use(express.json());
 

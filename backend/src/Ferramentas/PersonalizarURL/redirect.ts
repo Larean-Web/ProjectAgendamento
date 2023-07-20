@@ -14,6 +14,10 @@ const redirect = async (req: Request, res: Response) => {
       },
     });
 
+    const rest = link
+    console.log(rest)
+    
+
     if (!link) {
       return res.status(404).json({ error: "Link nao encontrado" });
     }
