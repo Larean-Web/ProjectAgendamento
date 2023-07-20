@@ -25,6 +25,7 @@ router.post("/cadastrar/loginadmin", loginadmin);
 router.post("/whatsapp/novamsg", NovaMsg);
 router.get("/:redirect", redirect);
 router.post("/teste1", teste1);
+router.post("/consulta/clientes/:id", ShowCliente);
 
 router.post("/encurtador", encurtarlink);
 router.use(auth);
@@ -38,7 +39,7 @@ router.post("/consulta/clientes/show", clienteShow);
 router.post("/consulta/compromissos", MostrarCompromissos);
 router.post("/consulta/administradores", MostrarAdmin);
 
-router.post("/consulta/clientes/:id", ShowCliente);
+
 router.get("/consulta/administrador/:id", ShowAdministrador);
 
 export default router;

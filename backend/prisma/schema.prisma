@@ -46,6 +46,7 @@ model Profissional {
 
 model Compromisso {
   id             Int          @id @default(autoincrement())
+  
   data           DateTime
   hora           String
   clienteId      String

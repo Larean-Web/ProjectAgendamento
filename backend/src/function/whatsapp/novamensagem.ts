@@ -12,7 +12,7 @@ const bemvindo =
   "🎉 Olá! Seja muito bem-vindo(a) ao nosso grupo! Estamos felizes em tê-lo(a) conosco. Caso queira agendar algo, é só clicar no link abaixo. Aproveite sua estadia e sinta-se à vontade para interagir conosco! \n \n";
 
 const redirecionar = process.env.REDIRECTAPI || "http://localhost:3001";
-const siteCliente = process.env.FRONTCLIENTE;
+const siteCliente = process.env.FRONTCLIENTE || "http://localhost:3001";
 
 const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
@@ -20,7 +20,7 @@ const NovaMsg = async (req: Request, res: Response, next: NextFunction) => {
   const horaAtual = new Date();
   const HoraLimite = new Date(horaAtual.getTime() - 4 * 60 * 60 * 1000);
   const fotocontato = await CapturarFoto(body.chat.id);
-  const conteudourl = `?id=${contato}&fotoperfil=${fotocontato}`;
+  const conteudourl = `?id=${contato}`;
   const urlgrande = siteCliente + "/" + conteudourl;
   const consultardb = await prisma.cliente.findUnique({
     where: {
