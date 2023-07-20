@@ -1,61 +1,59 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Title } from "../../shared/title";
 import { Paragraph } from "../../shared/paragraph";
 import Alerta from "../../components/alert";
 import axios from "axios";
+import { validateEmail, validateNumberPhone, validatePassword } from "../../utils/regex";
 
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 
 function SignUp() {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>(""); //Estados que controlam os dados
-    const [contact, setContact] = useState<string>();
+    const [contact, setContact] = useState<string>("(83)");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
 
     const [showAlert, setShowAlert] = useState<boolean>(false); //estados que disparam os alertas conforme o erro
+    const [isValidate, setIsValidate] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
+    const [isLogged, setIsLogged] = useState<boolean>(false)
 
     const [showPassword, setShowPassword] = useState<boolean>(false); //estados e refs que definem se esconde ou mostra senha
     const hidePasswword = useRef<HTMLInputElement | null>(null);
     const hideConfirm = useRef<HTMLInputElement | null>(null);
 
-    const [isLogged, setIsLogged] = useState<boolean>(false)
-    
-
-    const BASE_ROTA_CADASTRO = import.meta.env.VITE_CADASTRO_ROUTE 
+    const BASE_ROTA_CADASTRO = import.meta.env.VITE_CADASTRO_ROUTE;
 
 
-    if(isLogged){
-        return(
-            <Navigate to="/"/>      //quando o usuario fizer o cadastro, será redirecionado a pagina de login para que ele consiga entrar na pagina de adm
-        )
-    }
-
-    async function handleSigup(event: any) {
-        event.preventDefault();
-
+    useEffect(() => {
         if (
+            (!validateEmail.test(email) && !validatePassword.test(password)) && !validateNumberPhone ||
             name == "" ||
             email == "" ||
             contact == "" ||
             password == "" ||
             confirmPassword == ""
         ) {
-            setShowAlert(true);
-            setMessage("Preencha os campos corretamente");
-            setTimeout(() => {
-                setShowAlert(false);
-            }, 2000);
+            setIsValidate(true);
         } else {
-            if (confirmPassword !== password) {
-                setShowAlert(true);
-                setMessage("As senhas não correspondem");
-                setTimeout(() => {
-                    setShowAlert(false);
-                }, 2000);
-            }
+            setIsValidate(false);
+        }
+    }, [name, email, contact, password, confirmPassword]);
+
+    if(isLogged){
+        <Navigate to="/"/>
+    }
+    
+    async function handleSigup(event: any) {
+        event.preventDefault();
+        if(confirmPassword !== password){
+            setShowAlert(true)
+            setMessage("As senha não correspondem")
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 2000)
         }
         const data = {
             nome: name,
@@ -64,28 +62,25 @@ function SignUp() {
             password: password,
         };
         await axios
-            .post(
-                BASE_ROTA_CADASTRO,
-                data
-            )
+            .post(BASE_ROTA_CADASTRO, data)
             .then(() => {
                 console.log("Usuario cadastrado com sucesso");
-                setName("")
-                setEmail("")
-                setContact("")
-                setPassword("")
-                setConfirmPassword("")
+                setName("");
+                setEmail("");
+                setContact("");
+                setPassword("");
+                setConfirmPassword("");
                 setTimeout(() => {
-                    setIsLogged(true)  //Esse estado vai verificar se o usuario se cadastrou corretamente e vai altorizar a mudança para a rota de login 
-                }, 2000)
+                    setIsLogged(true) //Esse estado vai verificar se o usuario se cadastrou corretamente e vai altorizar a mudança para a rota de login
+                }, 2000);
             })
             .catch((err) => {
                 console.log("Algo deu errado" + err);
-                setName("")
-                setEmail("")
-                setContact("")
-                setPassword("")
-                setConfirmPassword("")
+                setName("");
+                setEmail("");
+                setContact("");
+                setPassword("");
+                setConfirmPassword("");
             });
     }
 
@@ -117,21 +112,21 @@ function SignUp() {
                         type="text"
                         placeholder="Nome Completo"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={e => setName(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                     />
                     <input
                         type="email"
                         placeholder="Email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                     />
                     <input
                         type="tel"
                         placeholder="Celular (DDD)****"
                         value={contact}
-                        onChange={(e) => setContact(e.target.value)}
+                        onChange={e => setContact(e.target.value)}
                         className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                     />
                     <div className="relative">
@@ -139,7 +134,7 @@ function SignUp() {
                             type="password"
                             placeholder="Senha"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={e => setPassword(e.target.value)}
                             className="w-[200px] bg-gray-base/25 h-10 rounded-[50px] py-1 pl-5 outline-none"
                             ref={hidePasswword}
                         />
@@ -169,12 +164,18 @@ function SignUp() {
                                 <Paragraph text="relembrar senha" />
                             </div>
                         </div>
-                        <button
-                            type="submit"
-                            className="w-[250px] bg-pink-base rounded-[50px] h-7 text-white font-bold shadow-gray-400 shadow-md "
-                        >
-                            Criar conta
-                        </button>
+                        {isValidate ? (
+                            <i className="flex items-center justify-center w-[250px] bg-red-500 rounded-[50px] h-7 text-center text-white font-bold shadow-gray-400 shadow-md ">
+                                Criar conta
+                            </i>
+                        ) : (
+                            <button
+                                type="submit"
+                                className="w-[250px] bg-pink-base rounded-[50px] h-7 text-white font-bold shadow-gray-400 shadow-md "
+                            >
+                                Criar conta
+                            </button>
+                        )}
                     </div>
                     <Link
                         to="/"

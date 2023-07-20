@@ -12,7 +12,9 @@ import Calendar from "../components/calendar"
 import Services from "../pages/services"
 import Client from "../pages/client";
 
+
 function RouterApp() {
+
     return (
         <BrowserRouter>
             <Routes>
@@ -31,7 +33,7 @@ function RouterApp() {
                     <Route path="/agenda" element={<Scheduling />} >
                         <Route path="calendar/:id" element={<Calendar/>}/>
                     </Route>
-                    <Route path="/agenda/servicos" element={<Services/>}/>
+                    <Route path="/agenda/servicos" element={<Services />}/>
                     <Route path="/agenda/cliente" element={<Client/>}/>
                 </Route>
             </Routes>

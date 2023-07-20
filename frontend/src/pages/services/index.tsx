@@ -5,7 +5,7 @@ import Search from "../../components/search";
 import { BsTrash, BsFillQuestionCircleFill } from "react-icons/bs";
 import { RiAddFill } from "react-icons/ri";
 import { AddCategoy } from "../../components/modal";
-import { IoMdClose } from "react-icons/io"
+import { IoMdClose } from "react-icons/io";
 
 function Services() {
     const [isAdd, setIsAdd] = useState<boolean>(false);
@@ -21,7 +21,11 @@ function Services() {
                         <BsTrash size={26} />
                     </button>
                     <button onClick={() => setIsAdd(!isAdd)}>
-                    {isAdd ? <IoMdClose size={26}/> :<RiAddFill size={26} />}
+                        {isAdd ? (
+                            <IoMdClose size={26} />
+                        ) : (
+                            <RiAddFill size={26} />
+                        )}
                     </button>
                     <button>
                         <BsFillQuestionCircleFill size={26} />
@@ -34,7 +38,6 @@ function Services() {
 
             <button
                 className="m-auto text-darkblue-base font-bold"
-                
                 onClick={() => setIsAdd(!isAdd)}
             >
                 <RiAddFill size={40} />
@@ -46,7 +49,7 @@ function Services() {
                         : "hidden"
                 }
             >
-                <AddCategoy />
+                <AddCategoy isAdd={isAdd} setIsAdd={setIsAdd} />
             </div>
         </div>
     );
